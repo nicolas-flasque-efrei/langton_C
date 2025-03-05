@@ -12,7 +12,7 @@
 #include <unistd.h>
 #define pause(x) usleep(1000.0*x)
 #endif
-
+//
 int main() {
     init_display();
     // create a 30x30 map
@@ -22,19 +22,20 @@ int main() {
     // print the map
     int iter_max = 15000;
     for (int i = 0; i < iter_max; i++) {
-        // make a pause of 500 microsecs
+        // make a pause to see the animation in real time
         //pause(1);
-        if (get_map_value(loc, map) == WHITE) {
+        if (get_map_value(loc, map) == WH) {
             loc = turn_right(loc);
         }
-        else if (get_map_value(loc, map) == BLACK) {
+        else if (get_map_value(loc, map) == BK) {
             loc = turn_left(loc);
         }
         change_map_value(loc, map);
         putpixel(loc.x, loc.y, get_map_value(loc,map));
         loc = forward(loc, map);
     }
-    scanf("%s",&iter_max);
+    // dummy scanf to prevent the console from closing
+    scanf("%d",&iter_max);
     close_display();
     return 0;
 }
